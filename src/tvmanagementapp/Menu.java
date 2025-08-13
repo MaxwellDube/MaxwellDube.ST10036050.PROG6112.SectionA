@@ -74,7 +74,7 @@ public class Menu {
         System.out.print("Enter the number of episodes for " + SeriesName + ": ");
         String SeriesNumberOfEpisodes = input.nextLine();
         
-        
+       
         // Store in list
         seriesList.add(new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes));
         

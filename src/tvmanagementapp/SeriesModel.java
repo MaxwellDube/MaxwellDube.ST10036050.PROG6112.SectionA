@@ -37,5 +37,4 @@ public class SeriesModel {
         return SeriesNumberOfEpisodes;
     }
     
-    
 }

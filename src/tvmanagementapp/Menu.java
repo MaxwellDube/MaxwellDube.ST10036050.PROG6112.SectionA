@@ -17,7 +17,7 @@ public class Menu {
     
 
     public static void menuPopUp(){
-        
+        List<SeriesModel> seriesList = new ArrayList<>();
         
         
         boolean running = true;
@@ -26,7 +26,7 @@ public class Menu {
             String options = JOptionPane.showInputDialog(null, """
     
                 1 - Capture a new series
-                2 - Search  for a series
+                2 - Search for a series
                 3 - Update series age restriction                                             
                 4 - Delete a series
                 5 - Print series report - 2025
@@ -35,7 +35,7 @@ public class Menu {
             
             switch (options){
                 case "1":
-                    captureSeries();
+                    captureSeries(seriesList);
                     break;
                 case "2":
                     break; 
@@ -44,6 +44,13 @@ public class Menu {
                 case "4":
                     break;
                 case "5":
+                    for (SeriesModel series : seriesList) {
+                        System.out.println("ID: " + series.getSeriesId());
+                        System.out.println("Name: " + series.getSeriesName());
+                        System.out.println("Age Restriction: " + series.getSeriesAge());
+                        System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
+                        System.out.println("----------------------");
+                    }
                     break;
                 case "6":
                     running = false;
@@ -54,8 +61,8 @@ public class Menu {
 
     }
     
-    public static void captureSeries(){
-        List<SeriesModel> seriesList = new ArrayList<>();
+    public static void captureSeries(List seriesList){
+        
         
         System.out.print("Enter the Series ID: ");
         String SeriesId = input.nextLine();
@@ -74,7 +81,8 @@ public class Menu {
         System.out.print("Enter the number of episodes for " + SeriesName + ": ");
         String SeriesNumberOfEpisodes = input.nextLine();
         
-       
+        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+        
         // Store in list
         seriesList.add(new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes));
         
@@ -82,24 +90,9 @@ public class Menu {
         SeriesModel details = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
         
         
-        
         System.out.print("\n ID: " + details.getSeriesId() + "\n Name: " + details.getSeriesName() + "\n Age: " + details.getSeriesAge() + "\n Episodes: " + details.getSeriesNumberOfEpisodes() + "\n");
         
-        System.out.print("Print All existing Series? ");
-        String procced = input.nextLine();
-        if (procced.equals("1")){
-             for (SeriesModel series : seriesList) {
-                System.out.println("ID: " + series.getSeriesId());
-                System.out.println("Name: " + series.getSeriesName());
-                System.out.println("Age Restriction: " + series.getSeriesAge());
-                System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
-                System.out.println("----------------------");
-            }  
-        }
         
     }
     
-    public static void storedSeries(){
-        
-    }
 }

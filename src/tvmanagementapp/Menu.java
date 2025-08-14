@@ -38,8 +38,33 @@ public class Menu {
                     captureSeries(seriesList);
                     break;
                 case "2":
+                    String searchId = JOptionPane.showInputDialog(null, "w");
+                    for (SeriesModel series : seriesList) {
+                        String seriesFound = null;
+                        if(searchId.equals(series.getSeriesId())){
+                            
+                            System.out.println("----------------------\n");
+                            System.out.println("SERIES FOUND!!!");
+                            seriesFound = searchId;
+
+                        }
+                        
+                        if(seriesFound != null){
+                            System.out.println("\nID: " + series.getSeriesId());
+                            System.out.println("Name: " + series.getSeriesName());
+                            System.out.println("Age Restriction: " + series.getSeriesAge());
+                            System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
+                            System.out.println("----------------------\n");
+                            break;
+                            
+                        }else{
+                            System.out.println("No series by that id was found");
+                            break;
+                        }
+                    }
                     break; 
                 case "3":
+                    
                     break;
                 case "4":
                     break;
@@ -64,7 +89,7 @@ public class Menu {
     public static void captureSeries(List seriesList){
         
         
-        System.out.print("Enter the Series ID: ");
+        System.out.print("\nEnter the Series ID: ");
         String SeriesId = input.nextLine();
         
         System.out.print("Enter the Series Name: ");

@@ -20,6 +20,7 @@ public class SeriesModel {
         this.SeriesAge = SeriesAge;
         this.SeriesNumberOfEpisodes = SeriesNumberOfEpisodes;
     }
+    
 
     public String getSeriesId() {
         return SeriesId;

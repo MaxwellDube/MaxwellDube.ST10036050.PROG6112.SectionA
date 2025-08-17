@@ -14,10 +14,10 @@ import javax.swing.*;
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
-    
+    private static final List<SeriesModel> seriesList = new ArrayList<>();
 
     public static void menuPopUp(){
-        List<SeriesModel> seriesList = new ArrayList<>();
+        
         
         
         boolean running = true;
@@ -35,46 +35,26 @@ public class Menu {
             
             switch (options){
                 case "1":
-                    captureSeries(seriesList);
+                    Options.captureSeries(seriesList);
                     break;
                 case "2":
-                    String searchId = JOptionPane.showInputDialog(null, "w");
+                    String searchId = JOptionPane.showInputDialog(null, "Enter Code");
                     for (SeriesModel series : seriesList) {
-                        String seriesFound = null;
-                        if(searchId.equals(series.getSeriesId())){
-                            
-                            System.out.println("----------------------\n");
-                            System.out.println("SERIES FOUND!!!");
-                            seriesFound = searchId;
-
-                        }
-                        
-                        if(seriesFound != null){
-                            System.out.println("\nID: " + series.getSeriesId());
-                            System.out.println("Name: " + series.getSeriesName());
-                            System.out.println("Age Restriction: " + series.getSeriesAge());
-                            System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
-                            System.out.println("----------------------\n");
-                            break;
-                            
-                        }else{
-                            System.out.println("No series by that id was found");
-                            break;
-                        }
+                        Options.searchSeries(seriesList, searchId, series);
                     }
                     break; 
                 case "3":
                     
                     break;
                 case "4":
+                    for (SeriesModel series : seriesList) {
+                        Options.deleteSeries(series);
+                    }
+                    
                     break;
                 case "5":
                     for (SeriesModel series : seriesList) {
-                        System.out.println("ID: " + series.getSeriesId());
-                        System.out.println("Name: " + series.getSeriesName());
-                        System.out.println("Age Restriction: " + series.getSeriesAge());
-                        System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
-                        System.out.println("----------------------");
+                        Options.existingSeriesReport(series);
                     }
                     break;
                 case "6":
@@ -86,38 +66,6 @@ public class Menu {
 
     }
     
-    public static void captureSeries(List seriesList){
-        
-        
-        System.out.print("\nEnter the Series ID: ");
-        String SeriesId = input.nextLine();
-        
-        System.out.print("Enter the Series Name: ");
-        String SeriesName = input.nextLine();
-        
-        System.out.print("Enter the Series age restriction: ");
-        int SeriesAge = Integer.parseInt(input.nextLine());
-        
-        while (SeriesAge > 18 || SeriesAge < 2){
-            System.out.print("Please re-enter the Series age restriction between 2 & 18: ");
-            SeriesAge = Integer.parseInt(input.nextLine());
-        }
-        
-        System.out.print("Enter the number of episodes for " + SeriesName + ": ");
-        String SeriesNumberOfEpisodes = input.nextLine();
-        
-        //------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
-        
-        // Store in list
-        seriesList.add(new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes));
-        
-        //Instantietion for SeriesModel object
-        SeriesModel details = new SeriesModel(SeriesId, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
-        
-        
-        System.out.print("\n ID: " + details.getSeriesId() + "\n Name: " + details.getSeriesName() + "\n Age: " + details.getSeriesAge() + "\n Episodes: " + details.getSeriesNumberOfEpisodes() + "\n");
-        
-        
-    }
+    
     
 }

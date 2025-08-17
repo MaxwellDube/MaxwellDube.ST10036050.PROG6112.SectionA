@@ -18,7 +18,7 @@ public class Options {
     private static final List<SeriesModel> seriesList = new ArrayList<>();
     
     //captureSeries (Option 1)
-    public static void captureSeries(List seriesList){
+    public static void captureSeries(){
         
         
         System.out.print("\nEnter the Series ID: ");
@@ -51,60 +51,70 @@ public class Options {
 
     }
     
-    public static void searchSeries(List seriesList, String searchId, SeriesModel series ){
-        String seriesFound = null;
-        if(searchId.equals(series.getSeriesId())){
+    public static void searchSeries(){
+        String searchId = JOptionPane.showInputDialog(null, "Enter Code To Search");
+        for (SeriesModel series : seriesList) {
+            String seriesFound = null;
+            if(searchId.equals(series.getSeriesId())){
 
-            System.out.println("----------------------\n");
-            System.out.println("SERIES FOUND!!!");
-            seriesFound = searchId;
-            
-            
+                System.out.println("----------------------\n");
+                System.out.println("SERIES FOUND!!!");
+                seriesFound = searchId;
+
+
+                System.out.println("\nID: " + series.getSeriesId());
+                System.out.println("Name: " + series.getSeriesName());
+                System.out.println("Age Restriction: " + series.getSeriesAge());
+                System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
+                System.out.println("----------------------\n");
+                return;
+
+            }
+            if(seriesFound != null) {
+                System.out.println("No series by that id was found");
+                return;
+            }
+        }
+    }
+    
+    public static void existingSeriesReport(){
+        for (SeriesModel series : seriesList) {
             System.out.println("\nID: " + series.getSeriesId());
             System.out.println("Name: " + series.getSeriesName());
             System.out.println("Age Restriction: " + series.getSeriesAge());
             System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
-            System.out.println("----------------------\n");
-            return;
-
-        }
-        if(seriesFound != null) {
-            System.out.println("No series by that id was found");
-            return;
+            System.out.println("----------------------");
         }
     }
     
-    public static void existingSeriesReport(SeriesModel series){
-        System.out.println("ID: " + series.getSeriesId());
-        System.out.println("Name: " + series.getSeriesName());
-        System.out.println("Age Restriction: " + series.getSeriesAge());
-        System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
-        System.out.println("----------------------");
-    }
-    
-    public static void deleteSeries(SeriesModel series){
-        String id = series.getSeriesId();
-        String name = series.getSeriesName();
-        int age = series.getSeriesAge();
-        String episodes = series.getSeriesNumberOfEpisodes();
-        
-        String[] options = {"Delete", "Cancel"};
-        int choice = JOptionPane.showOptionDialog(null, "Are you sure you want to delete: " + id + name + age + episodes, "Message Action",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
-        
-        switch(choice){
-            case 0:
-                seriesList.remove(series); 
+    public static void deleteSeries(){
+        String Id = JOptionPane.showInputDialog(null, "Enter Code To Delete");
+        for (SeriesModel series : seriesList) {
+            String id = series.getSeriesId();
+            String name = series.getSeriesName();
+            int age = series.getSeriesAge();
+            String episodes = series.getSeriesNumberOfEpisodes();
 
-                System.out.println("SERIES SUCCESSFULLY DELETED!");
-                break;
-            case 1: 
-                
-                break;
+            if(Id.equals(series.getSeriesId())){
+                String[] options = {"Delete", "Cancel"};
+                int choice = JOptionPane.showOptionDialog(null, "Are you sure you want to delete: " + id + name + age + episodes, "Message Action",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
+
+                switch(choice){
+                    case 0:
+                        seriesList.remove(series);
+
+                        System.out.println("SERIES SUCCESSFULLY DELETED!\n");
+                        break;
+                    case 1: 
+
+                        break;
+                }
+
+            }
+            
         }
         
-//        String del = JOptionPane.showInputDialog(null, "1=");
-//        seriesList.remove(id);
         
     }
 }

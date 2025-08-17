@@ -14,7 +14,7 @@ import javax.swing.*;
 
 public class Menu {
     private static Scanner input = new Scanner(System.in);
-    private static final List<SeriesModel> seriesList = new ArrayList<>();
+    
 
     public static void menuPopUp(){
         
@@ -35,27 +35,19 @@ public class Menu {
             
             switch (options){
                 case "1":
-                    Options.captureSeries(seriesList);
+                    Options.captureSeries();
                     break;
                 case "2":
-                    String searchId = JOptionPane.showInputDialog(null, "Enter Code");
-                    for (SeriesModel series : seriesList) {
-                        Options.searchSeries(seriesList, searchId, series);
-                    }
+                        Options.searchSeries();                   
                     break; 
                 case "3":
                     
                     break;
-                case "4":
-                    for (SeriesModel series : seriesList) {
-                        Options.deleteSeries(series);
-                    }
-                    
+                case "4":                    
+                        Options.deleteSeries();              
                     break;
                 case "5":
-                    for (SeriesModel series : seriesList) {
-                        Options.existingSeriesReport(series);
-                    }
+                        Options.existingSeriesReport();   
                     break;
                 case "6":
                     running = false;

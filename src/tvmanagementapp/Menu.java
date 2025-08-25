@@ -41,7 +41,7 @@ public class Menu {
                         Options.searchSeries();                   
                     break; 
                 case "3":
-                    
+                        Options.updateSeries();
                     break;
                 case "4":                    
                         Options.deleteSeries();              

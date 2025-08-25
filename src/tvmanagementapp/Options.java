@@ -79,6 +79,8 @@ public class Options {
     
     public static void existingSeriesReport(){
         for (SeriesModel series : seriesList) {
+            System.out.println("----------------------");
+            System.out.println("SERIES REPORT");
             System.out.println("\nID: " + series.getSeriesId());
             System.out.println("Name: " + series.getSeriesName());
             System.out.println("Age Restriction: " + series.getSeriesAge());
@@ -97,7 +99,7 @@ public class Options {
 
             if(Id.equals(series.getSeriesId())){
                 String[] options = {"Delete", "Cancel"};
-                int choice = JOptionPane.showOptionDialog(null, "Are you sure you want to delete: " + id + name + age + episodes, "Message Action",
+                int choice = JOptionPane.showOptionDialog(null, "Are you sure you want to delete:\n "+ id + name + age + episodes, "Message Action",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);
 
                 switch(choice){
@@ -116,5 +118,66 @@ public class Options {
         }
         
         
+    }
+    
+    public static void updateSeries(){
+        String Id = JOptionPane.showInputDialog(null, "Enter Code for series You Want To Update");
+        for(SeriesModel series: seriesList){
+            
+            if(series.getSeriesId().equals(Id)){
+                System.out.println("ARE YOU SURE YOU WANT TO UPDATE THIS SERIES!");
+                
+                System.out.println("\nID: " + series.getSeriesId());
+                System.out.println("Name: " + series.getSeriesName());
+                System.out.println("Age Restriction: " + series.getSeriesAge());
+                System.out.println("Episodes: " + series.getSeriesNumberOfEpisodes());
+                System.out.println("----------------------");
+                
+                
+                System.out.print("CONFIRM (YES-y | NO-n):");
+                String confirm = input.nextLine();
+                
+                
+                while(confirm.equals("y") || confirm.equals("n") ){
+                    
+                    if (confirm.equals("y")){
+                        seriesList.remove(series);
+
+                        System.out.print("\nSeries ID = " + Id);
+
+                        System.out.print("\nEnter New Series Name: ");
+                        String SeriesName = input.nextLine();
+
+                        System.out.print("Enter New Series age restriction: ");
+                        int SeriesAge = Integer.parseInt(input.nextLine());
+
+                        while (SeriesAge > 18 || SeriesAge < 2){
+                            System.out.print("Please re-enter the Series age restriction between 2 & 18: ");
+                            SeriesAge = Integer.parseInt(input.nextLine());
+                        }
+
+                        System.out.print("Enter the New number of episodes for " + SeriesName + ": ");
+                        String SeriesNumberOfEpisodes = input.nextLine();
+
+                        // Store in list
+                        seriesList.add(new SeriesModel(Id, SeriesName, SeriesAge, SeriesNumberOfEpisodes));
+
+                        //Instantietion for SeriesModel object
+                        SeriesModel details = new SeriesModel(Id, SeriesName, SeriesAge, SeriesNumberOfEpisodes);
+                        
+                        System.out.println("----------------------");
+                        System.out.print("SERIES ID - " + Id + " - SUCCESFULLY UPDATED!\n");
+                        System.out.print("\n ID: " + details.getSeriesId() + "\n Name: " + details.getSeriesName() + "\n Age: " + details.getSeriesAge() + "\n Episodes: " + details.getSeriesNumberOfEpisodes() + "\n");
+                        return;
+                    }else if(confirm.equals("n")){
+                        return;
+                    }
+                    
+                System.out.println("PLEASE CONFIRM WITH APPROPRIATE LETTER (YES-y | NO-n):");
+                confirm = input.nextLine();
+                    
+                }     
+            }
+        }
     }
 }
